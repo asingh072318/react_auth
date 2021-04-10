@@ -1,2 +1,1 @@
-export const BASE_URL =
-  "https://interns-projects-backend-alpha.apigateway.in/api/projects/";
+export const BASE_URL = "http://server.home.root:8001/";
