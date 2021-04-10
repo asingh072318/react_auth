@@ -15,6 +15,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import * as pgutils from "./utils/pgutils";
 
 
 function Copyright() {
@@ -22,7 +23,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" >
-        Prem Shree Medicines
+        REACT_AUTH
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -71,10 +72,11 @@ class Index extends Component {
 
   login = () => {
     let payload = {
-      email:this.state.email,
+      username:this.state.email,
       password:this.state.password,
     };
     console.log(payload);
+    pgutils.login(payload);
   }
 
 

@@ -8,6 +8,7 @@ const baseURL = getBaseURL();
 export default State(currentState, {
   // Initial State should be starts with the key 'initial': ...
   initial: {
+    token: "",
     tags: [],
     selectedpackages: [],
     readme: "Default Text",
@@ -114,6 +115,7 @@ Effect("getCount", (requestObject = {}) => {
   //console.log(data0);
   $.ajax(settings);
 });
+
 Effect("fetchallData", (requestObject = {}) => {
   let abc = requestObject;
   let data0 = {
