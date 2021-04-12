@@ -13,7 +13,7 @@ export default State(currentState, {
       "admin":false,
       "isLoggedIn":false,
       "response":{
-        "exit_code":200,
+        "exit_code":-1,
         "message":"",
       },
     },
@@ -35,7 +35,7 @@ export default State(currentState, {
     state.currentuser['token'] = "";
     state.currentuser['admin'] = false;
     state.currentuser['isLoggedIn'] = false;
-    state.currentuser['response']['exit_code'] = 200;
+    state.currentuser['response']['exit_code'] = -1;
     state.currentuser['response']['message'] = "";
     return _.cloneDeep(state);
   },
@@ -45,11 +45,16 @@ export default State(currentState, {
       state.currentuser['admin'] = payload["admin"];
       state.currentuser['isLoggedIn'] = true;
     }
+    state.currentuser.response['exit_code'] = payload['exit_code'];
+    state.currentuser.response['message'] = payload['message'];
     console.log(state.currentuser);
     return _.cloneDeep(state);
   },
   setcurrentUserResponse(state,payload){
-    state.currentuser["response"]["exit_code"] = payload["exit_code"];
+    if(payload['exit_code'] === 200)
+      state.currentuser["response"]["exit_code"] = 205;
+    else
+      state.currentuser["response"]["exit_code"] = payload["exit_code"];
     state.currentuser["response"]["message"] = payload["message"];
     return _.cloneDeep(state);
   },

@@ -64,7 +64,11 @@ class Index extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps){
-    if(nextProps.coach.currentuser['isLoggedIn'] && nextProps.coach.currentuser['admin']){
+    console.log(nextProps.coach.currentuser.response);
+    if(nextProps.coach.currentuser.response['exit_code'] !== 200){
+      alert(nextProps.coach.currentuser.response['message']);
+    }
+    else if(nextProps.coach.currentuser['isLoggedIn'] && nextProps.coach.currentuser['admin']){
       browserHistory.push("/admin");
     }
     else if(nextProps.coach.currentuser['isLoggedIn']){
