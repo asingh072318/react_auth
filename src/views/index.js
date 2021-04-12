@@ -15,7 +15,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import * as pgutils from "./utils/pgutils";
+import * as pgutils from "../utils/pgutils";
 
 
 function Copyright() {
@@ -62,6 +62,16 @@ class Index extends Component {
       password: "",
     };
   }
+
+  UNSAFE_componentWillReceiveProps(nextProps){
+    if(nextProps.coach.currentuser['isLoggedIn'] && nextProps.coach.currentuser['admin']){
+      browserHistory.push("/admin");
+    }
+    else if(nextProps.coach.currentuser['isLoggedIn']){
+      browserHistory.push("/home");
+    }
+  }
+
   states = (e, value) => {
     if (value === "email") {
       this.setState({ email: e.target.value });
@@ -75,8 +85,15 @@ class Index extends Component {
       username:this.state.email,
       password:this.state.password,
     };
-    console.log(payload);
     pgutils.login(payload);
+  }
+
+  register = () => {
+    let payload = {
+      username:this.state.email,
+      password:this.state.password,
+    };
+    pgutils.register(payload);
   }
 
 
@@ -99,7 +116,7 @@ class Index extends Component {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Username"
               name="email"
               autoComplete="email"
               autoFocus
@@ -126,6 +143,15 @@ class Index extends Component {
               onClick={() => this.login()}
             >
               Sign In
+            </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={() => this.register()}
+            >
+              Register
             </Button>
             <Grid container>
               <Grid item xs>

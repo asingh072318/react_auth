@@ -7,6 +7,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // Store Initialization
 // ------------------------------------
 const store = createStore(window.__INITIAL_STATE__)
+export default store
 
 // Render Setup
 // ------------------------------------

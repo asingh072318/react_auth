@@ -8,7 +8,15 @@ const baseURL = getBaseURL();
 export default State(currentState, {
   // Initial State should be starts with the key 'initial': ...
   initial: {
-    token: "",
+    currentuser:{
+      "token":"",
+      "admin":false,
+      "isLoggedIn":false,
+      "response":{
+        "exit_code":200,
+        "message":"",
+      },
+    },
     tags: [],
     selectedpackages: [],
     readme: "Default Text",
@@ -21,6 +29,29 @@ export default State(currentState, {
     readonly: true,
     count: 0,
     modal: false
+  },
+  resetCurrentUser(state){
+    console.log('resetting current user');
+    state.currentuser['token'] = "";
+    state.currentuser['admin'] = false;
+    state.currentuser['isLoggedIn'] = false;
+    state.currentuser['response']['exit_code'] = 200;
+    state.currentuser['response']['message'] = "";
+    return _.cloneDeep(state);
+  },
+  setcurrentUserToken(state,payload) {
+    if(payload['exit_code'] == 200){
+      state.currentuser['token'] = payload["token"];
+      state.currentuser['admin'] = payload["admin"];
+      state.currentuser['isLoggedIn'] = true;
+    }
+    console.log(state.currentuser);
+    return _.cloneDeep(state);
+  },
+  setcurrentUserResponse(state,payload){
+    state.currentuser["response"]["exit_code"] = payload["exit_code"];
+    state.currentuser["response"]["message"] = payload["message"];
+    return _.cloneDeep(state);
   },
   setModalVisible(state, payload) {
     state.modal = payload;
