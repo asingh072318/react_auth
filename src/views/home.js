@@ -20,6 +20,8 @@ class Home extends Component {
     };
     if(!props.coach.currentuser['isLoggedIn'])
       browserHistory.push('/');
+    else if(props.coach.currentuser['isLoggedIn'] && props.coach.currentuser['admin'])
+      browserHistory.push('/admin');
   }
 
   render() {
